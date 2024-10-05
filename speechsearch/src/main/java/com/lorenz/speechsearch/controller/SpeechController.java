@@ -43,7 +43,7 @@ public class SpeechController
     @PostMapping
     public ResponseEntity<Speech> createSpeech(@RequestBody Speech speech) {
         // ensure speaker exists
-        if (speech.getDate() == null || speech.getSpeaker().getId() == null) {
+        if (speech.getSpeaker() == null || speech.getSpeaker().getId() == null) {
             return ResponseEntity.badRequest().build();
         }
         Optional<Speaker> speaker = speakerRepository.findById(speech.getSpeaker().getId());
