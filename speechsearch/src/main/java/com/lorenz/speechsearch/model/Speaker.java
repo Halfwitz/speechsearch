@@ -56,6 +56,7 @@ public class Speaker {
         this.speeches = speeches;
     }
 
+    @Override
     public String toString() {
         return "Speaker{id =" + id + ", name='" + name + "', role='"
         + role + "'}";
