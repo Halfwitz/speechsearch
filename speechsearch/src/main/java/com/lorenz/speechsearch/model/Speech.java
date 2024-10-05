@@ -47,7 +47,7 @@ public class Speech {
     }
 
     // GETS & SETS
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
