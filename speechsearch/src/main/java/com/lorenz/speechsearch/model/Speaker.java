@@ -2,19 +2,21 @@ package com.lorenz.speechsearch.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity // marks class as JPA entity
 public class Speaker {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // auto increment private key id
+    @Id // primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
+    private Long id;
 
     private String name; // name of speaker
 
     private String role; // type of speaker (president, senator, etc.)
 
-    // one-to-many relationship (speeches stored for each Speaker)
-    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL, orphanRemoval = true)
+    // one-to-many relationship with Speech ('speaker' owns relationship, all operations cascaded to related entities)
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL, orphanRemoval = true) // removes orphaned Speech entities
     private List<Speech> speeches;
 
     // CONSTRUCTORS
@@ -53,5 +55,11 @@ public class Speaker {
     public void setSpeeches(List<Speech> speeches) {
         this.speeches = speeches;
     }
+
+    public String toString() {
+        return "Speaker{id =" + id + ", name='" + name + "', role='"
+        + role + "'}";
+    }
+
 
 }
