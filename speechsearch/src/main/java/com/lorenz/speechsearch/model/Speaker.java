@@ -1,5 +1,6 @@
 package com.lorenz.speechsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Speaker {
 
     // one-to-many relationship with Speech ('speaker' owns relationship, all operations cascaded to related entities)
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL, orphanRemoval = true) // removes orphaned Speech entities
+    @JsonManagedReference // serialize normally
     private List<Speech> speeches;
 
     // CONSTRUCTORS

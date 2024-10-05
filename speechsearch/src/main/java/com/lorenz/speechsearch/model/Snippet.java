@@ -1,5 +1,6 @@
 package com.lorenz.speechsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 
@@ -15,6 +16,7 @@ public class Snippet {
 
     @ManyToOne
     @JoinColumn(name = "speech_id", nullable = false)
+    @JsonBackReference // do not serialize
     private Speech speech;
 
     @Lob

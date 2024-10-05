@@ -1,5 +1,7 @@
 package com.lorenz.speechsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,9 +28,11 @@ public class Speech {
 
     @ManyToOne
     @JoinColumn(name = "speaker_id")
+    @JsonBackReference // do not serialize
     private Speaker speaker;
 
     @OneToMany(mappedBy = "speech", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // serialize normally
     private List<Snippet> snippets;
 
     // CONSTRUCTORS
