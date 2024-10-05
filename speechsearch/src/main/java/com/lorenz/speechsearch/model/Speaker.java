@@ -1,11 +1,15 @@
 package com.lorenz.speechsearch.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity // marks class as JPA entity
+@JsonIdentityInfo( // handle serializaion and prevent infinite recursion with object identifiers
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Speaker {
 
     @Id // primary key
@@ -18,7 +22,7 @@ public class Speaker {
 
     // one-to-many relationship with Speech ('speaker' owns relationship, all operations cascaded to related entities)
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL, orphanRemoval = true) // removes orphaned Speech entities
-    @JsonManagedReference // serialize normally
+    //@JsonManagedReference // serialize normally
     private List<Speech> speeches;
 
     // CONSTRUCTORS

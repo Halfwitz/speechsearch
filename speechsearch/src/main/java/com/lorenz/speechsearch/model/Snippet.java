@@ -1,6 +1,8 @@
 package com.lorenz.speechsearch.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 
@@ -8,6 +10,9 @@ import java.time.LocalTime;
  * Represents a portion of a speech in which a specific speech occurs. Associated with one speech
  */
 @Entity
+@JsonIdentityInfo( // handle serializaion and prevent infinite recursion with object identifiers
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Snippet {
 
     @Id
@@ -16,7 +21,7 @@ public class Snippet {
 
     @ManyToOne
     @JoinColumn(name = "speech_id", nullable = false)
-    @JsonBackReference // do not serialize
+    //@JsonBackReference // do not serialize
     private Speech speech;
 
     @Lob

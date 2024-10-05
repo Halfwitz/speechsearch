@@ -1,7 +1,9 @@
 package com.lorenz.speechsearch.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
  * portions where the speech in the snippet occurs.
  */
 @Entity
+@JsonIdentityInfo( // handle serializaion and prevent infinite recursion with object identifiers
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Speech {
 
     @Id
@@ -28,11 +33,11 @@ public class Speech {
 
     @ManyToOne
     @JoinColumn(name = "speaker_id")
-    @JsonBackReference // do not serialize
+    //@JsonBackReference // do not serialize
     private Speaker speaker;
 
     @OneToMany(mappedBy = "speech", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // serialize normally
+    //@JsonManagedReference // serialize normally
     private List<Snippet> snippets;
 
     // CONSTRUCTORS
