@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * REST Controller
- * Allows performing CRUD operations on Speaker entities via HTTP requests
+ * Allows performing CRUD operations on <b><code>Speaker</code></b> entities via HTTP requests
  */
 @RestController
 @RequestMapping("/api/speakers")
