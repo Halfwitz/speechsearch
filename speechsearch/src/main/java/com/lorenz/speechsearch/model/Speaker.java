@@ -28,6 +28,8 @@ public class Speaker {
     }
 
     // GETTERS AND SETTERS
+    public Long getId() { return id; }
+
     public void setId(Long id) {
         this.id = id;
     }
