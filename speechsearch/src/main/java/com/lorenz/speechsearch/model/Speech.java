@@ -1,11 +1,13 @@
 package com.lorenz.speechsearch.model;
 
 import jakarta.persistence.*;
-import jdk.jshell.Snippet;
-
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a single speech attached to a specific Speaker. Speeches are made of Snippets with time stamps to specific
+ * portions where the speech in the snippet occurs.
+ */
 @Entity
 public class Speech {
 
